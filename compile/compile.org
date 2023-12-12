@@ -1,0 +1,20 @@
+* 编译
+
+#+begin_src bash
+
+ gcc -Og -o prog main.c sum.c
+
+
+
+cpp -o main.i main.c
+cpp -o sum.i sum.c
+
+gcc -S -o main.s main.i
+gcc -S -o sum.s sum.i
+
+as -o main.o main.s
+as -o sum.o sum.s
+
+ ld -static -o prog main.o sum.o /usr/lib/crt1.o /usr/lib/crti.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/crtbeginT.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1 -L/usr/lib -L/usr/lib --start-group -lgcc -lgcc_eh -lc --end-group -L/usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/crtend.o /usr/lib/crtn.o
+
+#+end_src
